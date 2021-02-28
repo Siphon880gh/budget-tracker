@@ -1,0 +1,31 @@
+- name: Guides
+  href: https://qunitjs.com/guides/
+  sub:
+    - name: Getting Started
+      href: https://qunitjs.com/intro/
+    - name: Command-line interface
+      href: https://qunitjs.com/cli/
+    - name: Plugins
+      href: https://qunitjs.com/plugins/
+    - name: 2.x Upgrade Guide
+      href: https://qunitjs.com/upgrade-guide-2.x/
+- name: Documentation
+  href: /
+  sub:
+    - name: Main methods
+      href: /QUnit/
+    - name: Assertions
+      href: /assert/
+    - name: Configuration tools
+      href: /config/
+    - name: Callback events
+      href: /callbacks/
+    - name: Async control
+      href: /async/
+- name: About
+  href: /about/
+  sub:
+    - name: Who's using QUnit?
+      href: /projects/
+    - name: About QUnit
+      href: /about/

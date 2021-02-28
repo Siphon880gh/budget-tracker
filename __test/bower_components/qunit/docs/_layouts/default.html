@@ -1,0 +1,89 @@
+---
+layout: page
+---
+
+<section class="sidebar">
+    <h4>Main methods</h4>
+    <ul class="sidebar-list">
+    {% assign methods = site.pages | where:'categories', 'main' %}
+    {% for entry in methods %}
+    <li class="sidebar-item{% if entry.url == page.url %} sidebar-item-active{% endif %}">
+        <a href="{{ entry.url }}">{{entry.title}}</a>
+    </li>
+    {% endfor %}
+    </ul>
+
+    <h4>Assertions</h4>
+    <ul class="sidebar-list">
+    {% assign assertions = site.pages | where:'categories', 'assert' %}
+    {% for entry in assertions %}
+    <li class="sidebar-item{% if entry.url == page.url %} sidebar-item-active{% endif %}">
+        <a href="{{ entry.url }}">{{entry.title}}</a>
+    </li>
+    {% endfor %}
+    </ul>
+
+    <h4>Configuration tools</h4>
+
+    <ul class="sidebar-list">
+    {% assign config = site.pages | where:'categories', 'config' %}
+    {% for entry in config %}
+    <li class="sidebar-item{% if entry.url == page.url %} sidebar-item-active{% endif %}">
+        <a href="{{ entry.url }}">{{entry.title}}</a>
+    </li>
+    {% endfor %}
+    </ul>
+
+    <h4>Callback events</h4>
+
+    <ul class="sidebar-list">
+    {% assign callbacks = site.pages | where:'categories', 'callbacks' %}
+    {% for entry in callbacks %}
+    <li class="sidebar-item{% if entry.url == page.url %} sidebar-item-active{% endif %}">
+        <a href="{{ entry.url }}">{{entry.title}}</a>
+    </li>
+    {% endfor %}
+    </ul>
+
+    <h4>Async control</h4>
+
+    <ul class="sidebar-list">
+    {% assign async = site.pages | where:'categories', 'async' %}
+    {% for entry in async %}
+    <li class="sidebar-item{% if entry.url == page.url %} sidebar-item-active{% endif %}">
+        <a href="{{ entry.url }}">{{entry.title}}</a>
+    </li>
+    {% endfor %}
+    </ul>
+
+    <h4>Other</h4>
+    <ul class="sidebar-list">
+        <li class="sidebar-item"><a href="/deprecated/">Deprecated methods</a></li>
+        <!-- <li class="sidebar-item"><a href="/removed/">Removed methods</a></li> -->
+    </ul>
+</section>
+<div class="body" role="main">
+    <h2>{{ page.title }}</h2>
+    {%- if page.version_added or page.version_deprecated -%}
+        {%- assign warning = false -%}
+        {%- if page.version_added == "unreleased" or page.version_deprecated or page.version_removed -%}
+            {%- assign warning = true -%}
+        {%- endif -%}
+
+    <p class="version-details{% if warning %} note--warning{% endif %}">
+        {%- capture lines -%}
+            {%- if page.version_added %}
+                {% include version.html version=page.version_added label="version added" %}
+            {%- endif -%}
+            {%- if page.version_deprecated %}
+                {% include version.html version=page.version_deprecated label="deprecated in" %}
+            {%- endif -%}
+            {%- if page.version_removed %}
+                {% include version.html version=page.version_removed label="removed in" %}
+            {%- endif -%}
+        {%- endcapture -%}
+        {{ lines | strip | newline_to_br }}
+    </p>
+    {%- endif %}
+    {{ content }}
+</div>

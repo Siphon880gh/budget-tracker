@@ -1,0 +1,28 @@
+{
+  "name": "qunit",
+  "main": [
+    "qunit/qunit.js",
+    "qunit/qunit.css"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "!LICENSE.txt",
+    "package.json",
+    "Gruntfile.js",
+    "node_modules",
+    "test"
+  ],
+  "version": "2.14.0",
+  "homepage": "https://github.com/jquery/qunit",
+  "_release": "2.14.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.14.0",
+    "commit": "02153df06cb5f1523020d99e7be62d71dde06b68"
+  },
+  "_source": "https://github.com/jquery/qunit.git",
+  "_target": "^2.14.0",
+  "_originalSource": "qunit",
+  "_direct": true
+}
