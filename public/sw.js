@@ -3,11 +3,12 @@ self.addEventListener("install", event => {
     self.skipWaiting();
 
     event.waitUntil(
-        caches.open("precache-v1").then(cache => {
+        caches.open("precache-v2").then(cache => {
             // Caching path does not have to be preceded with `public/` because starting the path with `/`
             // will start off the path from wherever Express delivered the HTML route
             const filesToCache = [
                 "/",
+                "/index.html",
                 "/css/styles.css",
                 "/icons/icon-72x72.png",
                 "/icons/icon-96x96.png",
@@ -18,7 +19,11 @@ self.addEventListener("install", event => {
                 "/icons/icon-384x384.png",
                 "/icons/icon-512x512.png",
                 "/js/index.js",
-                "/index.html",
+                "/css/vendors/font-awesome-v4.7.0.min.css",
+                "/css/fonts/fontawesome-webfont.ttf",
+                "/js/vendors/chart.v2.8.0.min.js",
+                "/manifest.json", // just to stop errors
+                "/sw.js" // just to stop errors
             ];
 
             cache.addAll(filesToCache);
