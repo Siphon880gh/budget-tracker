@@ -58,15 +58,34 @@ function temp_add(newRecord) {
     objectStore.add(newRecord);
 
     // To see if it runs
-    debugger;
+    // debugger;
 } // add
 
 /**
  * 
- * @function temp_purge
+ * @function purgeAllAtClient
+ * Helper function that clears the IndexedDB database
+ */
+const purgeAllAtClient = () => {
+    // Access object store with read and write permissions
+    const transaction = db.transaction(['transactions'], 'readwrite');
+
+    // Access the new_pizza object store
+    const objectStore = transaction.objectStore('transactions');
+
+    // Clear all items in your store
+    objectStore.clear();
+
+    // To see if it runs
+    // debugger;
+}
+
+/**
+ * 
+ * @function temp_move_to_remote
  * User is back online. Move all IndexedDB records to the server's database. Then purge the IndexedDB records.
  */
-async function temp_purge() {
+async function temp_move_to_remote() {
     // Open a transaction on your db
     const transaction = db.transaction(['transactions'], 'readwrite');
 
@@ -79,26 +98,10 @@ async function temp_purge() {
     getAll.onsuccess = function() {
         const manyRecords = getAll.result;
 
-        const purgeAllAtClient = () => {
-            // Access object store with read and write permissions
-            const transaction = db.transaction(['transactions'], 'readwrite');
-
-            // Access the new_pizza object store
-            const objectStore = transaction.objectStore('transactions');
-
-            // Clear all items in your store
-            objectStore.clear();
-
-            // To see if it runs
-            debugger;
-        }
-
         // Insert IndexedDB records to server's database, then purge IndexedDB
         (function insertManyToServer(thenCallback) {
 
             if (manyRecords.length === 0) return;
-            console.log({ message: "Offline transactions found. Will move to server database now.", records: manyRecords })
-
             fetch("/api/transaction/bulk", {
                     method: "POST",
                     body: JSON.stringify(manyRecords),
@@ -110,16 +113,16 @@ async function temp_purge() {
                 .then(response => {
                     thenCallback();
 
-                    return JSON.stringify({ message: "Temp records purged from IndexedDB and pushed to server database", response: response.json() });
+                    console.log({ message: "User is back online. Temp records purged from IndexedDB and pushed to server database", response: response.json() });
                 });
         })(purgeAllAtClient);
 
     };
 
-} // temp_purge
+} // temp_move_to_remote
 
 
 // When back online, push the temporary records to the server's database and clear temporary records on IndexedDb
 window.addEventListener('online', () => {
-    temp_purge();
+    temp_move_to_remote();
 });

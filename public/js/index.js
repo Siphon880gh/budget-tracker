@@ -14,6 +14,16 @@ fetch("/api/transaction")
         populateChart();
     });
 
+function clearForm() {
+
+    let nameEl = document.querySelector("#t-name");
+    let amountEl = document.querySelector("#t-amount");
+
+    // Clear form
+    nameEl.value = "";
+    amountEl.value = "";
+}
+
 function populateTotal() {
     // reduce transaction amounts to a single total value
     let total = transactions.reduce((total, t) => {
@@ -127,25 +137,59 @@ function sendTransaction(isAdding) {
             if (data.errors) {
                 errorEl.textContent = "Missing Information";
             } else {
-                // clear form
-                nameEl.value = "";
-                amountEl.value = "";
+                clearForm();
             }
         })
         .catch(err => {
             // fetch failed, so save in indexed db
             temp_add(transaction);
+            clearForm();
 
-            // clear form
-            nameEl.value = "";
-            amountEl.value = "";
+            console.log({ message: "User is offline. Will update transactions to server database once user is online.", transaction })
         });
-}
+} // sendTransaction
 
+// User clicks add fund button
 document.querySelector("#add-btn").onclick = function() {
     sendTransaction(true);
 };
 
-document.querySelector("#sub-btn").onclick = function() {
+// User clicks subtract fund button
+querySelector("#sub-btn").onclick = function() {
     sendTransaction(false);
+};
+
+
+// Option to reset database to blank
+
+function resetDatabase() {
+    purgeAllAtClient(); // You are clearing the database, so any offline transactions before get dropped
+
+    fetch("/api/transaction", {
+            method: "DELETE"
+        })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            console.log({ message: "User is offline. Will wipe server database if back online in this session. This means any transactions made offline will be cleared too. Leave webpage to cancel wiping database." });
+            window.addEventListener('online', () => {
+                document.querySelector("#tbody").innerHTML = "";
+
+                resetDatabase();
+                location.reload(); // so doesn't keep resetting database if you disconnect more than once
+            });
+        });
+} // resetDatabase
+
+document.querySelector("#reset-btn").onclick = function() {
+    if (confirm("Are you sure you want to wipe the database?")) {
+        resetDatabase();
+
+        // Empty transactions table
+
+        document.querySelector("#tbody").innerHTML = "";
+        clearForm();
+        location.reload(); // forces graph to clear, also forces old entries to flush from cache so they don't reappear if you add a new transaction
+    }
 };
