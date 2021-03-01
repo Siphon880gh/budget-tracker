@@ -2,7 +2,7 @@ const router = require("express").Router();
 const Transaction = require("../models/transaction.js");
 const path = require("path");
 
-// Test
+// Tests
 router.get("/test", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../__test", "index.html"));
 });

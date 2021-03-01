@@ -18,12 +18,13 @@ self.addEventListener("install", event => {
                 "/icons/icon-192x192.png",
                 "/icons/icon-384x384.png",
                 "/icons/icon-512x512.png",
-                "/js/index.js",
+                // "/js/index.js",
+                // "/js/idb.js",
                 "/css/vendors/font-awesome-v4.7.0.min.css",
                 "/css/fonts/fontawesome-webfont.ttf",
                 "/js/vendors/chart.v2.8.0.min.js",
                 "/manifest.json", // just to stop errors
-                "/sw.js" // just to stop errors
+                // "/sw.js" // just to stop errors
             ];
 
             cache.addAll(filesToCache);
