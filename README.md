@@ -10,7 +10,7 @@ By Weng Fei Fung. Budget Tracker lets you record your expenses and deposits so y
 
 Demo
 ---
-.
+Try out on [Heroku](https://budget-tracker-wff.herokuapp.com/).
 
 Screenshot
 ---
