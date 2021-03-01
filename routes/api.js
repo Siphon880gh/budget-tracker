@@ -8,6 +8,14 @@ router.get("/test", (req, res) => {
 });
 
 // Restful API
+
+/**
+ * @route       POST /api/transaction   Create transaction record to database
+ * @bodyParam   name {string}           Name of transaction
+ * @bodyParam   value {signed float}    Fund added or subtracted (negative)
+ * @bodyParam   date {Date}             Date and time of transaction
+ * 
+ */
 router.post("/api/transaction", ({ body }, res) => {
     Transaction.create(body)
         .then(dbTransaction => {
@@ -18,6 +26,11 @@ router.post("/api/transaction", ({ body }, res) => {
         });
 });
 
+/**
+ * @route       POST /api/transaction/bulk   Create multiple transaction records to database
+ * @bodyParam   - Array<Objects>            Each object has name, value, date key-value pairs (refer to POST/api/transaction)
+ * 
+ */
 router.post("/api/transaction/bulk", ({ body }, res) => {
     Transaction.insertMany(body)
         .then(dbTransaction => {
@@ -28,8 +41,13 @@ router.post("/api/transaction/bulk", ({ body }, res) => {
         });
 });
 
+/**
+ * @route       GET /api/transaction   Get all transaction records from database
+ * @return      - Array<Objects>       Each object has name, value, date key-value pairs (refer to POST/api/transaction)
+ * 
+ */
 router.get("/api/transaction", (req, res) => {
-    Transaction.find({}).sort({ date: -1 })
+    Transaction.find({}).sort({ date: -1 }).select("-__v")
         .then(dbTransaction => {
             res.json(dbTransaction);
         })
