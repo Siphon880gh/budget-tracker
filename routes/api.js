@@ -56,4 +56,18 @@ router.get("/api/transaction", (req, res) => {
         });
 });
 
+/**
+ * @route       DELETE /api/transaction   Clear all transaction records from database
+ * 
+ */
+router.delete("/api/transaction", (req, res) => {
+    Transaction.deleteMany({})
+        .then(dbTransaction => {
+            res.json({ message: "Deleted all transactions" });
+        })
+        .catch(err => {
+            res.status(404).json(err);
+        });
+});
+
 module.exports = router;
