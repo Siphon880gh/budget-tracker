@@ -104,7 +104,7 @@ function sendTransaction(isAdding) {
     // create record
     let transaction = {
         name: nameEl.value,
-        value: amountEl.value,
+        value: Math.abs(parseInt(amountEl.value)),
         date: new Date().toISOString()
     };
 
@@ -155,7 +155,7 @@ document.querySelector("#add-btn").onclick = function() {
 };
 
 // User clicks subtract fund button
-querySelector("#sub-btn").onclick = function() {
+document.querySelector("#sub-btn").onclick = function() {
     sendTransaction(false);
 };
 
