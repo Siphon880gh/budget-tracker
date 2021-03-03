@@ -6,7 +6,7 @@ Budget Tracker
 
 Description
 ---
-By Weng Fei Fung. Budget Tracker lets you record your expenses and deposits so you can track your budget anywhere you are. Even if you are traveling to a remote area where internet is spotty, the app remembers your offline records and updates as soon as the internet is connected. You can install the PWA and have easy access from your mobile's home screen.
+By Weng Fei Fung. Budget Tracker is an offline capable PWA that lets you record your expenses and deposits so you can track your budget anywhere you are. Even if you are traveling to a remote area where internet is spotty, the app remembers your offline changes and updates your online account as soon as the internet is connected. Visit the app and install the PWA to your mobile's home screen.
 
 Demo
 ---
@@ -31,7 +31,7 @@ Table of Contents
 
 Installation
 ---
-Run `npm install` to download npm modules. Then start express server with `npm run start`. Visit localhost:3001 to begin using. Alternately, you can deploy to a node server like Heroku.
+Run `npm install` to download npm modules. Then start express server with `npm run start`. Visit localhost:3001 to begin trying it out on localhost. You can deploy to your own server for personal use. A good solution is Heroku with MongoDB Atlas.
 
 Tests
 ---
