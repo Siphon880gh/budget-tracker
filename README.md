@@ -10,7 +10,9 @@ By Weng Fei Fung. Budget Tracker is an offline capable PWA that lets you record 
 
 Demo
 ---
-Try out on [Heroku](https://budget-tracker-wff.herokuapp.com/).
+### Try out on [Heroku](https://budget-tracker-wff.herokuapp.com/).
+
+#### **You can also [try the interactive tests](https://budget-tracker-wff.herokuapp.com/test) that were later refactored into the app.**
 
 Screenshot
 ---
