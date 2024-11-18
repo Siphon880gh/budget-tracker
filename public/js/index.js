@@ -1,7 +1,7 @@
 let transactions = [];
 let myChart;
 
-fetch("/api/transaction")
+fetch("/app/budget-tracker/api/transaction")
     .then(response => {
         return response.json();
     })
@@ -122,7 +122,7 @@ function sendTransaction(isAdding) {
     populateTotal();
 
     // also send to server
-    fetch("/api/transaction", {
+    fetch("/app/budget-tracker/api/transaction", {
             method: "POST",
             body: JSON.stringify(transaction),
             headers: {
@@ -165,7 +165,7 @@ document.querySelector("#sub-btn").onclick = function() {
 function resetDatabase() {
     purgeAllAtClient(); // You are clearing the database, so any offline transactions before get dropped
 
-    fetch("/api/transaction", {
+    fetch("/app/budget-tracker/api/transaction", {
             method: "DELETE"
         })
         .then(response => {
